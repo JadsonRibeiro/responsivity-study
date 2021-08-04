@@ -1,15 +1,10 @@
 import { GetServerSideProps } from 'next'
 import { useEffect, useState } from 'react';
+import { Card } from '../components/Card';
 
 import { Header } from '../components/Header';
 
-interface Article {
-  id: number;
-  duration: string;
-  thumb: string;
-  title: string;
-  video_id: string;
-}
+import { Article } from '../types';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -50,55 +45,40 @@ export default function Home() {
 
       <main>
         <section className="cards">
-          {articles.map(article => (
-            <div className="card" key={article.video_id}>
-              <div className="image">
-                <img src={article.thumb} />
-              </div>
-              <div className="content">
-                <p className="title text--medium">
-                  {article.title}
-                </p>
-                <div className="info">
-                  <p className="text--medium">{article.duration}</p>
-                  <p className="price text--medium">Free</p>
-                </div>
-              </div>
-            </div>
-          ))}
+          {articles.map(article => <Card key={article.video_id} article={article} /> )}
         </section>
       </main>
 
       <section id="form">
-      <form action="">
-        <h3>Quero Estudar na Rocket!</h3>
-        <div className="form-group">
-          <input className="input-control" placeholder="Nome" />
+        <form action="">
+          <h3>Quero Estudar na Rocket!</h3>
+          <div className="form-group">
+            <input className="input-control" placeholder="Nome" />
 
-          <input type="email" className="input-control" placeholder="Email" />
-        </div>
+            <input type="email" className="input-control" placeholder="Email" />
+          </div>
 
-        <div className="form-group">
-          <input className="input-control" placeholder="Empresa" />
-        </div>
+          <div className="form-group">
+            <input className="input-control" placeholder="Empresa" />
+          </div>
 
-        <div className="form-group">
-          <input className="input-control" placeholder="Endereço" />
-        </div>
+          <div className="form-group">
+            <input className="input-control" placeholder="Endereço" />
+          </div>
 
-        <div className="form-group">
-          <input className="input-control" placeholder="Cidade" />
-          <input className="input-control" placeholder="Estado"/>
-          <input className="input-control" placeholder="CEP"/>
-        </div>
+          <div className="form-group">
+            <input className="input-control" placeholder="Cidade" />
+            <input className="input-control" placeholder="Estado"/>
+            <input className="input-control" placeholder="CEP"/>
+          </div>
 
-        <div className="form-group">
-          <button type="submit" className="button">Save</button>
+          <div className="form-group">
+            <button type="submit" className="button">Save</button>
 
-        </div>
+          </div>
 
-      </form>
-    </section>
+        </form>
+      </section>
     </div>
   )
 }
