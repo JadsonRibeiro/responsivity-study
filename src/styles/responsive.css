@@ -2,6 +2,14 @@
   html {
     font-size: 50%;
   }
+
+  .form-group {
+    display: block;
+  }
+
+  .form-group input {
+    width: 100%;
+  }
 }
 
 @media (max-width: 630px) {
@@ -16,13 +24,5 @@
 
   #form form {
     padding: 25px;
-  }
-
-  .form-group {
-    display: block;
-  }
-
-  .form-group input {
-    width: 100%;
   }
 }
