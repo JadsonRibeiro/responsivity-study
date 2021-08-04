@@ -1,23 +1,15 @@
 import { GetServerSideProps } from 'next'
-import { useEffect, useState } from 'react';
 import { Card } from '../components/Card';
 
 import { Header } from '../components/Header';
 
 import { Article } from '../types';
 
-export default function Home() {
-  const [articles, setArticles] = useState<Article[]>([]);
+interface HomeProps {
+  articles: Article[]
+}
 
-  useEffect(() => {
-    fetch('http://localhost:3333/articles')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      setArticles(data);
-    })
-  }, []);
-
+export default function Home({ articles }: HomeProps) {
   return (
     <div>
       <Header />
@@ -84,7 +76,12 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await fetch('http://localhost:3333/articles')
+  const articles = await response.json();
+
   return {
-    props: {}
+    props: {
+      articles 
+    }
   }
 }
